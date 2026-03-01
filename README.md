@@ -1,4 +1,4 @@
-# 项目名称
+# LuoXiaohei-Parallax
 LuoXiaohei Parallax Interaction.
 让罗小黑在网页中对你眨眼摇头的视差小玩具。
 <img width="400" alt="image" src="https://github.com/user-attachments/assets/860f0a87-7b52-41c2-8456-93e7180df248" />

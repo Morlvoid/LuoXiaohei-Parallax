@@ -1,0 +1,291 @@
+/* 全局重置和基础样式 */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* 重置所有常见元素的默认样式 */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li,
+button,
+a,
+i,
+input,
+body {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 0;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+    color: inherit;
+}
+
+h1:focus,
+h2:focus,
+h3:focus,
+h4:focus,
+h5:focus,
+h6:focus,
+p:focus,
+ul:focus,
+li:focus,
+button:focus,
+a:focus,
+i:focus,
+input:focus,
+body:focus {
+    outline: 0;
+}
+
+
+/* 主体样式 */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Barlow", sans-serif;
+    background: #000;
+    overflow: hidden;
+    touch-action: none;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.wrapper .container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* test0.png - 参与视差效果，与其他图片保持一致 */
+
+.top-image {
+    position: absolute !important;
+    width: 450px !important;
+    height: 450px !important;
+    object-fit: contain;
+    z-index: 4;
+    pointer-events: none;
+}
+
+
+/* 视差场景容器 */
+
+.wrapper .container .scene {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+
+/* 圆形背景元素 - 移除渐变背景 */
+
+.wrapper .container .circle {
+    position: absolute !important;
+    width: 500px !important;
+    height: 500px !important;
+    border-radius: 50%;
+    /* 取消渐变背景 */
+    opacity: 0.8;
+}
+
+
+/* 图片元素样式 - 使用object-fit保持比例 */
+
+.wrapper .container .pAnime {
+    position: absolute !important;
+    width: 800px !important;
+    height: 450px !important;
+    object-fit: contain;
+    pointer-events: none;
+    transition: transform 0.3s ease;
+}
+
+
+/* 眨眼遮罩容器 - 在test0.png下方 */
+
+.eye-covers {
+    position: absolute;
+    width: 3000px;
+    height: 600px;
+    pointer-events: none;
+}
+
+
+/* 眨眼动画的黑色遮罩 */
+
+.eye-cover {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    background: #000;
+    transition: transform 0.15s ease-in-out;
+    pointer-events: none;
+}
+
+.eye-cover.top {
+    top: 0;
+    transform: translateY(-100%);
+}
+
+.eye-cover.bottom {
+    bottom: 0;
+    transform: translateY(100%);
+}
+
+
+/* 眨眼效果 */
+
+.blinking .eye-cover.top {
+    transform: translateY(0);
+}
+
+.blinking .eye-cover.bottom {
+    transform: translateY(0);
+}
+
+
+/* 摇头晃脑动画 - 降低速度 */
+
+@keyframes headShake {
+    0%,
+    100% {
+        transform: translateX(0) rotate(0deg);
+    }
+    10% {
+        transform: translateX(-10px) rotate(-5deg);
+    }
+    20% {
+        transform: translateX(10px) rotate(5deg);
+    }
+    30% {
+        transform: translateX(-10px) rotate(-5deg);
+    }
+    40% {
+        transform: translateX(10px) rotate(5deg);
+    }
+    50% {
+        transform: translateX(-5px) rotate(-3deg);
+    }
+    60% {
+        transform: translateX(5px) rotate(3deg);
+    }
+    70% {
+        transform: translateX(-3px) rotate(-2deg);
+    }
+    80% {
+        transform: translateX(3px) rotate(2deg);
+    }
+    90% {
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
+.head-shaking {
+    animation: headShake 2s ease-in-out;
+    /* 增加动画持续时间 */
+}
+
+
+/* 移动端适配 - 保持与PC端一致的比例 */
+
+@media screen and (max-width: 799px) {
+    .top-image {
+        width: 75% !important;
+        height: 75% !important;
+        max-width: 450px;
+        max-height: 450px;
+    }
+    .wrapper .container .scene {
+        width: 100vw;
+        height: 100vw;
+        max-width: 600px;
+        max-height: 600px;
+    }
+    .eye-covers {
+        width: 100vw;
+        height: 100vw;
+        max-width: 600px;
+        max-height: 600px;
+    }
+    .wrapper .container .circle {
+        width: 83% !important;
+        height: 83% !important;
+        max-width: 500px;
+        max-height: 500px;
+    }
+    .wrapper .container .pAnime {
+        width: 75% !important;
+        height: 75% !important;
+        max-width: 800px;
+        max-height: 450px;
+    }
+    .eye-cover {
+        height: 30%;
+    }
+}
+
+
+/* 小屏幕高度适配 */
+
+@media screen and (max-height: 700px) {
+    .top-image {
+        width: 60vh !important;
+        height: 60vh !important;
+    }
+    .wrapper .container .scene {
+        width: 80vh;
+        height: 80vh;
+    }
+    .eye-covers {
+        width: 80vh;
+        height: 80vh;
+    }
+    .wrapper .container .circle {
+        width: 66vh !important;
+        height: 66vh !important;
+    }
+    .wrapper .container .pAnime {
+        width: 60vh !important;
+        height: 60vh !important;
+    }
+    .eye-cover {
+        height: 30%;
+    }
+}
+
+
+/* 触摸设备优化 */
+
+@media (pointer: coarse) {
+    .wrapper .container .scene {
+        touch-action: none;
+    }
+}
